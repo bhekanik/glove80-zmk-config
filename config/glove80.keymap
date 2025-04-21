@@ -153,27 +153,6 @@
             hold-trigger-on-release;
         };
 
-        hold_shortcut: hold_shortcut {
-            compatible = "zmk,behavior-hold-tap";
-            label = "HOLD_SHORTCUT";
-            bindings = <&kp>, <&kp>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <400>;
-            quick-tap-ms = <400>;
-            require-prior-idle-ms = <400>;
-            flavor = "tap-preferred";
-        };
-
-        lower: lower {
-            compatible = "zmk,behavior-tap-dance";
-            label = "LAYER_TAP_DANCE";
-            #binding-cells = <0>;
-            bindings = <&mo 0>, <&to 0>;
-
-            tapping-term-ms = <200>;
-        };
-
         hyper_right: hyper_right {
             compatible = "zmk,behavior-hold-tap";
             label = "HYPER_RIGHT";
@@ -257,24 +236,46 @@
     combos {
         compatible = "zmk,combos";
 
-        combo_curly_left {
-            bindings = <&kp LEFT_BRACE>;
+        combo_copy {
+            bindings = <&kp LG(C)>;
             key-positions = <49 50>;
+            layers = <0>;
         };
 
-        combo_curly_right {
-            bindings = <&kp RIGHT_BRACE>;
-            key-positions = <59 60>;
+        combo_paste {
+            bindings = <&kp LG(V)>;
+            key-positions = <51 50>;
+            layers = <0>;
         };
 
         combo_equal {
             bindings = <&kp EQUAL>;
             key-positions = <29 30>;
+            layers = <0>;
         };
 
         combo_plus {
             bindings = <&kp PLUS>;
             key-positions = <26 25>;
+            layers = <0>;
+        };
+
+        tab {
+            bindings = <&kp TAB>;
+            key-positions = <24 25>;
+            layers = <0>;
+        };
+
+        combo_undo {
+            bindings = <&kp LG(Z)>;
+            key-positions = <47 48>;
+            layers = <0>;
+        };
+
+        combo_cut {
+            bindings = <&kp LG(X)>;
+            key-positions = <48 49>;
+            layers = <0>;
         };
     };
 
@@ -291,12 +292,12 @@
             // | MAGIC | HOME| END | LEFT | RIGHT|      | BSPC  | DEL   | LALT  | | RALT  | RET   | SPACE |      |  UP   | DOWN  |  [   |   ]   | PGDN |
 
             bindings = <
-&kp ESC          &kp F1                         &kp F2                    &kp F3                        &kp F4                                                                                                                                                                                    &kp F5                       &kp F6                          &kp F7                      &kp F8                              &kp F9
-&kp EQUAL        &kp N1                         &kp N2                    &kp N3                        &kp N4                  &kp N5                                                                                                                      &kp N6                                &kp N7                       &kp N8                          &kp N9                      &kp N0                              &kp MINUS
-&kp TAB          &kp Q                          &kp W                     &kp E                         &kp R                   &kp T                                                                                                                       &kp Y                                 &kp U                        &kp I                           &kp O                       &kp P                               &kp BSLH
-&kp BACKSPACE    &kp A                          &hm_left_ring LEFT_ALT S  &hm_left_middle LEFT_SHIFT D  &hm_left_index LGUI F   &hyper_left LC(LA(LS(LEFT_GUI))) G                                                                                          &hyper_right RC(RA(RS(RIGHT_GUI))) H  &hm_right_index RIGHT_GUI J  &hm_right_middle RIGHT_SHIFT K  &hm_right_ring RIGHT_ALT L  &kp SEMI                            &kp SQT
-&kp NON_US_BSLH  &hm_left_pinky LEFT_CONTROL Z  &kp X                     &hold_shortcut LG(C) C        &hold_shortcut LG(V) V  &kp B                               &kp LSHFT  &kp LCTRL             &layer_td  &kp LGUI   &kp RCTRL             &kp RSHFT  &kp N                                 &kp M                        &kp COMMA                       &kp DOT                     &hm_right_pinky RIGHT_CONTROL FSLH  &kp PG_UP
-&magic MAGIC 0   &kp HOME                       &kp END                   &kp LEFT                      &kp RIGHT                                                   &kp ENTER  &layer_on_hold 1 F13  &kp SPACE  &kp ENTER  &layer_on_hold 1 F13  &kp SPACE                                        &kp UP                       &kp DOWN                        &kp LBKT                    &kp RBKT                            &kp PG_DN
+&kp ESC          &kp F1                         &kp F2                    &kp F3                        &kp F4                                                                                                                                                                                              &kp F5                       &kp F6                          &kp F7                      &kp F8                              &kp F9
+&kp EQUAL        &kp N1                         &kp N2                    &kp N3                        &kp N4                 &kp N5                                                                                                                                 &kp N6                                &kp N7                       &kp N8                          &kp N9                      &kp N0                              &kp MINUS
+&kp TAB          &kp Q                          &kp W                     &kp E                         &kp R                  &kp T                                                                                                                                  &kp Y                                 &kp U                        &kp I                           &kp O                       &kp P                               &kp BSLH
+&kp BACKSPACE    &kp A                          &hm_left_ring LEFT_ALT S  &hm_left_middle LEFT_SHIFT D  &hm_left_index LGUI F  &hyper_left LC(LA(LS(LEFT_GUI))) G                                                                                                     &hyper_right RC(RA(RS(RIGHT_GUI))) H  &hm_right_index RIGHT_GUI J  &hm_right_middle RIGHT_SHIFT K  &hm_right_ring RIGHT_ALT L  &kp SEMI                            &kp SQT
+&kp NON_US_BSLH  &hm_left_pinky LEFT_CONTROL Z  &kp X                     &kp C                         &kp V                  &kp B                               &kp LEFT_BRACE  &kp LCTRL             &layer_td  &kp LGUI   &kp RCTRL             &kp RIGHT_BRACE  &kp N                                 &kp M                        &kp COMMA                       &kp DOT                     &hm_right_pinky RIGHT_CONTROL FSLH  &kp PG_UP
+&magic MAGIC 0   &kp HOME                       &kp END                   &kp LEFT                      &kp RIGHT                                                  &kp ENTER       &layer_on_hold 1 F13  &kp SPACE  &kp ENTER  &layer_on_hold 1 F13  &kp SPACE                                              &kp UP                       &kp DOWN                        &kp LBKT                    &kp RBKT                            &kp PG_DN
             >;
         };
 

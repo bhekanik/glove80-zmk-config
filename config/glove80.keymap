@@ -365,23 +365,23 @@
 
         numbers {
             bindings = <
-&trans  &trans  &trans                     &trans  &trans                                                                                                                                                  &trans                        &trans  &trans                       &trans  &trans
-&trans  &trans  &trans                     &trans  &trans                      &trans                                                                               &trans                                 &trans                        &trans  &trans                       &trans  &trans
-&trans  &trans  &trans                     &trans  &trans                      &trans                                                                               &trans                                 &trans                        &trans  &trans                       &trans  &trans
-&trans  &kp N1  &hm_left_ring LEFT_ALT N2  &kp N3  &hm_left_index LEFT_GUI N4  &hyper_left LS(LC(LG(LEFT_ALT))) N5                                                  &hyper_right RS(RC(RG(RIGHT_ALT))) N6  &hm_right_index RIGHT_GUI N7  &kp N8  &hm_right_ring RIGHT_ALT N9  &kp N0  &trans
-&trans  &trans  &trans                     &trans  &trans                      &trans                               &trans  &trans  &trans  &trans  &trans  &trans  &trans                                 &trans                        &trans  &trans                       &trans  &trans
-&trans  &trans  &trans                     &trans  &trans                                                           &trans  &trans  &trans  &trans  &trans  &trans                                         &trans                        &trans  &trans                       &trans  &trans
+&trans  &trans   &trans      &trans             &trans                                                                                                                        &trans  &trans  &trans  &trans     &trans
+&trans  &trans   &trans      &trans             &trans           &trans                                                                                            &trans     &trans  &trans  &trans  &trans     &trans
+&trans  &kp ESC  &kp C_RW    &kp C_PLAY_PAUSE   &kp C_FF         &trans                                                                                            &kp MINUS  &kp N7  &kp N8  &kp N9  &trans     &trans
+&trans  &kp TAB  &kp K_MUTE  &kp C_VOLUME_DOWN  &kp C_VOLUME_UP  &hyper_left LS(LC(LG(LEFT_ALT))) N5                                                               &kp EQUAL  &kp N4  &kp N5  &kp N6  &kp ENTER  &trans
+&trans  &to 3    &trans      &kp C_BRI_DEC      &kp C_BRI_INC    &trans                               &trans        &trans  &trans  &trans  &trans  &trans         &kp N0     &kp N1  &kp N2  &kp N3  &trans     &trans
+&trans  &trans   &trans      &trans             &to 0                                                 &sk LEFT_GUI  &trans  &trans  &trans  &trans  &sk RIGHT_ALT             &trans  &trans  &trans  &trans     &trans
             >;
         };
 
         navigate {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                                                                  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                                                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                                                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                                                  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans  &trans  &trans
+&trans  &trans           &trans        &trans            &trans                                                                                        &trans                &trans           &trans       &trans                 &trans
+&trans  &trans           &trans        &trans            &trans         &trans                                                               &trans    &trans                &trans           &trans       &trans                 &trans
+&trans  &kp ESC          &trans        &kp LC(UP_ARROW)  &trans         &kp Q                                                                &trans    &kp RG(LEFT_BRACKET)  &kp RG(RS(TAB))  &kp RG(TAB)  &kp RG(RIGHT_BRACKET)  &trans
+&trans  &mt LG(TAB) TAB  &kp LC(LEFT)  &kp LC(DOWN)      &kp LC(RIGHT)  &kp LEFT_GUI                                                         &kp LEFT  &kp DOWN              &kp UP_ARROW     &kp RIGHT    &kp ENTER              &trans
+&trans  &trans           &trans        &trans            &trans         &kp DEL       &trans  &trans  &trans  &trans  &trans  &trans         &trans    &trans                &trans           &trans       &trans                 &trans
+&trans  &trans           &trans        &trans            &to 0                        &trans  &trans  &trans  &trans  &trans  &sk RIGHT_ALT            &to 1                 &trans           &trans       &trans                 &trans
             >;
         };
 
@@ -392,7 +392,7 @@
 &none        &rgb_ug RGB_SPI  &rgb_ug RGB_SAI  &rgb_ug RGB_HUI  &rgb_ug RGB_BRI  &rgb_ug RGB_TOG                                                   &none  &none  &none  &none  &none  &none
 &bootloader  &rgb_ug RGB_SPD  &rgb_ug RGB_SAD  &rgb_ug RGB_HUD  &rgb_ug RGB_BRD  &rgb_ug RGB_EFF                                                   &none  &none  &none  &none  &none  &bootloader
 &sys_reset   &none            &none            &none            &none            &none            &bt_2  &bt_3  &none         &none  &none  &none  &none  &none  &none  &none  &none  &sys_reset
-&none        &none            &none            &none            &none                             &bt_0  &bt_1  &out OUT_USB  &none  &none  &none         &none  &none  &none  &none  &to 6
+&none        &none            &none            &none            &none                             &bt_0  &bt_1  &out OUT_USB  &none  &none  &none         &none  &none  &none  &none  &to 0
             >;
         };
 

@@ -381,7 +381,7 @@
 &trans  &kp ESC        &trans             &kp LC(UP_ARROW)  &trans         &kp Q                                                                                                                                &trans    &kp RG(LEFT_BRACKET)  &kp RG(RS(TAB))  &kp RG(TAB)  &kp RG(RIGHT_BRACKET)  &trans
 &trans  &kp BACKSPACE  &kp LC(LEFT)       &kp LC(DOWN)      &kp LC(RIGHT)  &kp RG(TAB)                                                                                                                          &kp LEFT  &kp DOWN              &kp UP_ARROW     &kp RIGHT    &trans                 &trans
 &trans  &none          &kp LA(BACKSPACE)  &kp TAB           &kp DEL        &none        &trans                  &trans                      &trans  &trans  &trans                                   &trans     &trans    &trans                &trans           &trans       &trans                 &kp F13
-&trans  &trans         &trans             &kp LCTRL         &to 0                       &layer_on_hold 2 ENTER  &layer_on_hold 1 LA(SPACE)  &trans  &trans  &mt RA(RS(RCTRL)) RS(RA(RC(RG(SPACE))))  &kp SPACE            &to 1                 &to 2            &trans       &trans                 &trans
+&trans  &trans         &trans             &kp LEFT_ALT      &to 0                       &layer_on_hold 2 ENTER  &layer_on_hold 1 LA(SPACE)  &trans  &trans  &mt RA(RS(RCTRL)) RS(RA(RC(RG(SPACE))))  &kp SPACE            &to 1                 &to 2            &trans       &trans                 &trans
             >;
         };
 

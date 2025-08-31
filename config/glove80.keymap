@@ -334,7 +334,7 @@
 &trans  &trans           &trans        &trans        &trans          &trans                                                            &trans             &trans           &trans        &trans                &trans                 &trans
 &trans  &kp EXCLAMATION  &kp AT_SIGN   &kp HASH      &kp DOLLAR      &kp PERCENT                                                       &kp CARET          &kp AMPERSAND    &kp ASTERISK  &kp LEFT_PARENTHESIS  &kp RIGHT_PARENTHESIS  &trans
 &trans  &kp NUMBER_1     &kp NUMBER_2  &kp NUMBER_3  &kp NUMBER_4    &kp NUMBER_5                                                      &kp NUMBER_6       &kp NUMBER_7     &kp NUMBER_8  &kp NUMBER_9          &kp NUMBER_0           &trans
-&trans  &kp TILDE        &kp GRAVE     &kp AT        &kp LEFT_BRACE  &kp LEFT_BRACKET  &trans  &trans  &trans  &trans  &trans  &trans  &kp RIGHT_BRACKET  &kp RIGHT_BRACE  &trans        &trans                &trans                 &kp F13
+&trans  &kp TILDE        &kp GRAVE     &kp EQUAL     &kp LEFT_BRACE  &kp LEFT_BRACKET  &trans  &trans  &trans  &trans  &trans  &trans  &kp RIGHT_BRACKET  &kp RIGHT_BRACE  &trans        &trans                &trans                 &kp F13
 &trans  &trans           &trans        &to 3         &trans                            &trans  &to 0   &trans  &trans  &to 1   &trans                     &trans           &to 2         &trans                &trans                 &trans
             >;
         };

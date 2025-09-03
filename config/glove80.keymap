@@ -219,7 +219,7 @@
             bindings = <&sk>;
             #binding-cells = <1>;
             quick-release;
-            release-after-ms = <250>;
+            release-after-ms = <100>;
             lazy;
             ignore-modifiers;
         };

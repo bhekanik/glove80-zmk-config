@@ -305,6 +305,12 @@
             key-positions = <60 61>;
             layers = <0>;
         };
+
+        combo_equals {
+            bindings = <&kp EQUAL>;
+            key-positions = <28 29>;
+            layers = <0>;
+        };
     };
 
     keymap {
@@ -342,12 +348,12 @@
 
         numbers {
             bindings = <
-&trans  &trans  &trans      &trans             &trans                                                                                                                &trans          &trans        &trans           &trans  &trans
-&trans  &trans  &trans      &trans             &trans           &trans                                                                               &trans          &trans          &trans        &trans           &trans  &trans
-&trans  &none   &kp C_RW    &kp C_PLAY_PAUSE   &kp C_FF         &kp F13                                                                              &none           &none           &none         &none            &trans  &trans
-&trans  &none   &kp K_MUTE  &kp C_VOLUME_DOWN  &kp C_VOLUME_UP  &hyper_left LS(LC(LG(LEFT_ALT))) N5                                                  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &trans  &trans
-&trans  &none   &trans      &kp C_BRI_DEC      &kp C_BRI_INC    &trans                               &trans  &trans  &trans  &trans  &trans  &trans  &kp HOME        &kp PAGE_DOWN   &kp PAGE_UP   &kp END          &trans  &kp F13
-&trans  &trans  &trans      &to 3              &trans                                                &trans  &to 0   &trans  &trans  &to 1   &trans                  &trans          &to 2         &trans           &trans  &trans
+&trans  &trans  &trans        &trans            &trans                                                                                                              &trans          &trans        &trans           &trans  &trans
+&trans  &trans  &trans        &trans            &trans         &trans                                                                               &trans          &trans          &trans        &trans           &trans  &trans
+&trans  &none   &kp C_RW      &kp C_PLAY_PAUSE  &kp C_FF       &kp F13                                                                              &none           &none           &none         &none            &trans  &trans
+&trans  &none   &kp LEFT_ALT  &kp LEFT_SHIFT    &kp LEFT_GUI   &hyper_left LS(LC(LG(LEFT_ALT))) N5                                                  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp UP_ARROW  &kp RIGHT_ARROW  &trans  &trans
+&trans  &none   &trans        &kp C_BRI_DEC     &kp C_BRI_INC  &trans                               &trans  &trans  &trans  &trans  &trans  &trans  &kp HOME        &kp PAGE_DOWN   &kp PAGE_UP   &kp END          &trans  &kp F13
+&trans  &trans  &trans        &to 3             &trans                                              &trans  &to 0   &trans  &trans  &to 1   &trans                  &trans          &to 2         &trans           &trans  &trans
             >;
         };
 

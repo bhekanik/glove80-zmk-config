@@ -2,6 +2,14 @@
  * Copyright (c) 2020 The ZMK Contributors
  *
  * SPDX-License-Identifier: MIT
+ *
+ * Glove80 layout — synchronized with Moonlander "Synchronized" layout
+ *
+ * Layer 0: Base (QWERTY + Home Row Mods)
+ * Layer 1: Symbols (Numbers, Symbols, F-keys)
+ * Layer 2: Navigation (Vim arrows, Page nav, Editing shortcuts)
+ * Layer 3: Magic (Glove80 BT/RGB management)
+ * Layer 4: Factory Test
  */
 
 #include <behaviors.dtsi>
@@ -13,23 +21,21 @@
 #define HYPER LC(LS(LG(LALT)))
 
 // layers
-
 #define DEFAULT 0
-#define LOWER 1
-#define MAGIC 2
-#define FACTORY_TEST 3
+#define SYMBOLS 1
+#define NAV 2
+#define MAGIC 3
+#define FACTORY_TEST 4
 
 / {
     behaviors {
-        // For the "layer" key, it'd nice to be able to use it as either a shift or a toggle.
-        // Configure it as a tap dance, so the first tap (or hold) is a &mo and the second tap is a &to
-
+        // Tap dance: first tap = momentary SYMBOLS, second tap = toggle SYMBOLS
         layer_td: tap_dance_0 {
             compatible = "zmk,behavior-tap-dance";
             label = "LAYER_TAP_DANCE";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&mo LOWER>, <&to LOWER>;
+            bindings = <&mo SYMBOLS>, <&to SYMBOLS>;
         };
 
         magic: magic_hold_tap {
@@ -41,11 +47,12 @@
             bindings = <&mo>, <&rgb_ug_status_macro>;
         };
 
+        // --- Home Row Mods (bilateral, per-finger tuned) ---
+
         hm_right_index: hm_right_index {
             compatible = "zmk,behavior-hold-tap";
             label = "HM_RIGHT_INDEX";
             bindings = <&kp>, <&kp>;
-
             #binding-cells = <2>;
             tapping-term-ms = <300>;
             quick-tap-ms = <300>;
@@ -59,7 +66,6 @@
             compatible = "zmk,behavior-hold-tap";
             label = "HM_LEFT_INDEX";
             bindings = <&kp>, <&kp>;
-
             #binding-cells = <2>;
             tapping-term-ms = <300>;
             quick-tap-ms = <300>;
@@ -73,7 +79,6 @@
             compatible = "zmk,behavior-hold-tap";
             label = "HM_RIGHT_MIDDLE";
             bindings = <&kp>, <&kp>;
-
             #binding-cells = <2>;
             tapping-term-ms = <210>;
             quick-tap-ms = <300>;
@@ -87,7 +92,6 @@
             compatible = "zmk,behavior-hold-tap";
             label = "HM_LEFT_MIDDLE";
             bindings = <&kp>, <&kp>;
-
             #binding-cells = <2>;
             tapping-term-ms = <210>;
             quick-tap-ms = <300>;
@@ -101,7 +105,6 @@
             compatible = "zmk,behavior-hold-tap";
             label = "HM_RIGHT_RING";
             bindings = <&kp>, <&kp>;
-
             #binding-cells = <2>;
             tapping-term-ms = <400>;
             quick-tap-ms = <300>;
@@ -115,7 +118,6 @@
             compatible = "zmk,behavior-hold-tap";
             label = "HM_LEFT_RING";
             bindings = <&kp>, <&kp>;
-
             #binding-cells = <2>;
             tapping-term-ms = <400>;
             quick-tap-ms = <300>;
@@ -129,7 +131,6 @@
             compatible = "zmk,behavior-hold-tap";
             label = "HM_RIGHT_PINKY";
             bindings = <&kp>, <&kp>;
-
             #binding-cells = <2>;
             tapping-term-ms = <260>;
             quick-tap-ms = <300>;
@@ -143,7 +144,6 @@
             compatible = "zmk,behavior-hold-tap";
             label = "HM_LEFT_PINKY";
             bindings = <&kp>, <&kp>;
-
             #binding-cells = <2>;
             tapping-term-ms = <260>;
             quick-tap-ms = <300>;
@@ -153,11 +153,12 @@
             hold-trigger-on-release;
         };
 
+        // --- Hyper hold-taps (G and H positions) ---
+
         hyper_right: hyper_right {
             compatible = "zmk,behavior-hold-tap";
             label = "HYPER_RIGHT";
             bindings = <&kp>, <&kp>;
-
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <300>;
@@ -171,21 +172,22 @@
             compatible = "zmk,behavior-hold-tap";
             label = "HYPER_LEFT";
             bindings = <&kp>, <&kp>;
-
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <300>;
             require-prior-idle-ms = <100>;
             flavor = "tap-preferred";
             hold-trigger-on-release;
-            hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 15 22 23 24 25 26 27 34 35 36 37 38 39 46 47 48 49 50 51 52 53 54 55 56 64 65 66 67 68 69 70 71 72 55 56 57 72 73 74>;
+            hold-trigger-key-positions = <5 6 7 8 9 16 17 18 19 20 21 28 29 30 31 32 33 40 41 42 43 44 45 55 56 57 58 59 60 61 62 63 72 73 74 75 76 77 78 79 52 53 54 69 70 71>;
         };
 
+        // --- Layer access hold-taps ---
+
+        // Tap = keycode, Hold = momentary layer (matches Moonlander hold behavior)
         layer_on_hold: layer_on_hold {
             compatible = "zmk,behavior-hold-tap";
             label = "LAYER_ON_HOLD";
-            bindings = <&sl>, <&kp>;
-
+            bindings = <&mo>, <&kp>;
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <300>;
@@ -195,11 +197,25 @@
             hold-trigger-key-positions = <5 6 7 8 9 16 17 18 19 20 21 28 29 30 31 32 33 40 41 42 43 44 45 55 56 57 58 59 60 61 62 63 72 73 74 75 76 77 78 79 52 53 54 69 70 71>;
         };
 
+        // Quote key: tap = ', hold = Navigation layer
+        // No bilateral filtering — uses timing only (matches Moonlander Oryx behavior)
+        nav_ht: nav_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "NAV_HOLD_TAP";
+            bindings = <&mo>, <&kp>;
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            require-prior-idle-ms = <150>;
+            flavor = "tap-preferred";
+        };
+
+        // --- Mod-morphs ---
+
         enter_or_capsword: enter_or_capsword {
             compatible = "zmk,behavior-mod-morph";
             label = "ENTER_OR_CAPSWORD";
             bindings = <&kp ENTER>, <&caps_word>;
-
             #binding-cells = <0>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
@@ -208,11 +224,11 @@
             compatible = "zmk,behavior-mod-morph";
             label = "BACKSPACE_OR_DELETE";
             bindings = <&kp BACKSPACE>, <&kp DELETE>;
-
             #binding-cells = <0>;
             mods = <(MOD_RSFT)>;
         };
 
+        // Quick-release sticky key for shift combos
         sticky_key_quick_release: sticky_key_quick_release {
             compatible = "zmk,behavior-sticky-key";
             label = "STICKY_KEY_QUICK_RELEASE";
@@ -314,13 +330,13 @@
         combo_left_shift {
             bindings = <&sticky_key_quick_release LEFT_SHIFT>;
             key-positions = <36 37>;
-            layers = <0 4>;
+            layers = <0 SYMBOLS>;
         };
 
         combo_right_shift {
             bindings = <&sticky_key_quick_release RIGHT_SHIFT>;
             key-positions = <42 43>;
-            layers = <0 4>;
+            layers = <0 SYMBOLS>;
         };
 
         combo_hyphen {
@@ -333,36 +349,65 @@
     keymap {
         compatible = "zmk,keymap";
 
+        // =====================================================================
+        // Layer 0: Base (QWERTY)
+        // Matches Moonlander "Synchronized" base layer
+        // Home row mods: A(Sym), S(Alt), F(Cmd), G(Hyper) | H(Hyper), J(Cmd), L(Alt), '(Nav)
+        // Pinkies: Z(Ctrl), /(Ctrl)
+        // =====================================================================
         default_layer {
-            // ---------------------------------------------------------------------------------------------------------------------------------
-            // |  F1   |  F2 |  F3 |  F4  |  F5  |                                                               |  F6   |  F7   |  F8  |   F9  |  F10 |
-            // |  =    |  1  |  2  |  3   |  4   |  5   |                                                 |  6   |   7   |   8   |  9   |   0   |   -  |
-            // |  TAB  |  Q  |  W  |  E   |  R   |  T   |                                                 |  Y   |   U   |   I   |  O   |   P   |   \  |
-            // |  ESC  |  A  |  S  |  D   |  F   |  G   |                                                 |  H   |   J   |   K   |  L   |   ;   |   '  |
-            // |   `   |  Z  |  X  |  C   |  V   |  B   | LSHFT | LCTRL | LOWER | | LGUI  | RCTRL | RSHFT |  N   |   M   |   ,   |  .   |   /   | PGUP |
-            // | MAGIC | HOME| END | LEFT | RIGHT|      | BSPC  | DEL   | LALT  | | RALT  | RET   | SPACE |      |  UP   | DOWN  |  [   |   ]   | PGDN |
-
             bindings = <
 &kp ESC               &kp F1                         &kp F2                    &kp F3    &kp F4                                                                                                                                                                                                                                  &kp F5                       &kp F6     &kp F7                      &kp F8                              &kp F9
 &kp NON_US_BSLH       &kp N1                         &kp N2                    &kp N3    &kp N4                 &kp N5                                                                                                                                                                     &kp N6                                &kp N7                       &kp N8     &kp N9                      &kp N0                              &kp MINUS
 &kp TAB               &kp Q                          &kp W                     &kp E     &kp R                  &kp T                                                                                                                                                                      &kp Y                                 &kp U                        &kp I      &kp O                       &kp P                               &kp BSLH
-&backspace_or_delete  &layer_on_hold 1 A             &hm_left_ring LEFT_ALT S  &kp D     &hm_left_index LGUI F  &hyper_left LC(LA(LS(LEFT_GUI))) G                                                                                                                                         &hyper_right RC(RA(RS(RIGHT_GUI))) H  &hm_right_index RIGHT_GUI J  &kp K      &hm_right_ring RIGHT_ALT L  &kp SEMI                            &kp SQT
-&kp LEFT_SHIFT        &hm_left_pinky LEFT_CONTROL Z  &kp X                     &kp C     &kp V                  &kp B                               &layer_on_hold 1 F13  &kp LCTRL             &layer_td                    &kp LGUI   &kp RCTRL             &layer_on_hold 1 F13         &kp N                                 &kp M                        &kp COMMA  &kp DOT                     &hm_right_pinky RIGHT_CONTROL FSLH  &kp RIGHT_SHIFT
-&magic MAGIC 0        &kp HOME                       &kp END                   &kp LEFT  &kp RIGHT                                                  &enter_or_capsword    &layer_on_hold 1 TAB  &mt LC(LA(LS(SPACE))) SPACE  &kp ENTER  &layer_on_hold 4 F13  &mt RC(RA(RS(SPACE))) SPACE                                        &kp UP                       &kp DOWN   &kp LBKT                    &kp RBKT                            &kp PG_DN
+&backspace_or_delete  &layer_on_hold SYMBOLS A        &hm_left_ring LEFT_ALT S  &kp D     &hm_left_index LGUI F  &hyper_left LC(LA(LS(LEFT_GUI))) G                                                                                                                                         &hyper_right RC(RA(RS(RIGHT_GUI))) H  &hm_right_index RIGHT_GUI J  &kp K      &hm_right_ring RIGHT_ALT L  &kp SEMI                            &nav_ht NAV SQT
+&kp LEFT_SHIFT        &hm_left_pinky LEFT_CONTROL Z  &kp X                     &kp C     &kp V                  &kp B                               &layer_on_hold SYMBOLS F13  &kp LCTRL             &layer_td                    &kp LGUI   &kp RCTRL             &layer_on_hold SYMBOLS F13   &kp N                                 &kp M                        &kp COMMA  &kp DOT                     &hm_right_pinky RIGHT_CONTROL FSLH  &kp RIGHT_SHIFT
+&magic MAGIC 0        &kp HOME                       &kp END                   &kp LEFT  &kp RIGHT                                                   &enter_or_capsword    &layer_on_hold SYMBOLS TAB  &mt LC(LA(LS(SPACE))) SPACE  &kp ENTER  &layer_on_hold SYMBOLS F13  &mt RC(RA(RS(SPACE))) SPACE                                        &kp UP                       &kp DOWN   &kp LBKT                    &kp RBKT                            &kp PG_DN
             >;
         };
 
-        lower_layer {
+        // =====================================================================
+        // Layer 1: Symbols (Numbers + Symbols + F-keys)
+        // Matches Moonlander "Number" layer
+        // Home row: 1-5 | 6-0 (with home row mods preserved)
+        // Above:    !@#$% | ^&*()
+        // Below:    ~ ` [ { ( | ) } ] = +
+        // F-keys across top rows
+        // Media controls on bottom right
+        // =====================================================================
+        symbols_layer {
             bindings = <
-&kp C_BRI_DN  &kp C_BRI_UP  &kp C_PREV  &kp C_NEXT  &kp C_PP                                                                              &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP   &none            &kp PAUSE_BREAK
-&trans        &none         &none       &none       &none      &kp HOME                                                        &kp LPAR   &kp KP_NUM  &kp KP_EQUAL  &kp KP_DIVIDE  &kp KP_MULTIPLY  &kp PSCRN
-&trans        &none         &none       &kp UP      &none      &kp END                                                         &kp RPAR   &kp KP_N7   &kp KP_N8     &kp KP_N9      &kp KP_MINUS     &kp SLCK
-&trans        &none         &kp LEFT    &kp DOWN    &kp RIGHT  &kp PG_UP                                                       &kp PRCNT  &kp KP_N4   &kp KP_N5     &kp KP_N6      &kp KP_PLUS      &none
-&trans        &kp K_CMENU   &none       &kp F11     &kp F12    &kp PG_DN  &trans  &trans  &to DEFAULT  &trans  &trans  &trans  &kp COMMA  &kp KP_N1   &kp KP_N2     &kp KP_N3      &kp KP_ENTER     &trans
-&trans        &kp CAPS      &kp INS     &kp F11     &kp F12               &trans  &trans  &trans       &trans  &trans  &trans             &kp KP_N0   &kp KP_N0     &kp KP_DOT     &kp KP_ENTER     &trans
+&trans        &kp F1                              &kp F2                         &kp F3     &kp F4                                                                                                                                                                                                                                                   &kp F6                                      &kp F7                            &kp F8     &kp F9                           &kp F10
+&trans        &kp EXCL                            &kp AT                         &kp HASH   &kp DLLR                &kp PRCNT                                                                                                                                                                                   &kp CARET                                   &kp AMPS                          &kp STAR   &kp LPAR                         &kp RPAR                         &kp F11
+&trans        &trans                              &trans                         &trans     &trans                  &trans                                                                                                                                                                                        &trans                                      &trans                            &trans     &trans                           &trans                           &kp F12
+&trans        &kp N1                              &hm_left_ring LEFT_ALT N2      &kp N3     &hm_left_index LGUI N4  &hyper_left LC(LA(LS(LEFT_GUI))) N5                                                                                                                                                           &hyper_right RC(RA(RS(RIGHT_GUI))) N6       &hm_right_index RIGHT_GUI N7      &kp N8     &hm_right_ring RIGHT_ALT N9      &kp N0                           &trans
+&trans        &kp TILDE                           &kp GRAVE                      &kp LBKT   &kp LBRC                &kp LPAR                            &trans              &trans                &to DEFAULT                  &trans     &trans                &trans                                             &kp RPAR                                    &kp RBRC                          &kp RBKT   &kp EQUAL                        &kp PLUS                         &trans
+&trans        &trans                              &trans                         &trans     &trans                                                       &trans              &trans                &trans                       &trans     &trans                &trans                                                                                         &kp C_PP                          &kp C_MUTE &kp C_VOL_DN                     &kp C_VOL_UP                     &trans
             >;
         };
 
+        // =====================================================================
+        // Layer 2: Navigation
+        // Matches Moonlander "Navigation" layer
+        // Right home row: ← ↓ ↑ → (vim-style on HJKL)
+        // Right below:    Home PgDn PgUp End
+        // Left below:     ⌘Z ⌘X ⌘C ⌘V (editing shortcuts)
+        // Left home:      ⌘+Shift+4 on G (screenshot)
+        // =====================================================================
+        nav_layer {
+            bindings = <
+&trans        &trans     &trans      &trans     &trans                                                                                                                                                                               &trans      &trans      &trans      &trans      &trans
+&trans        &trans     &trans      &trans     &trans      &trans                                                                                                                                             &trans      &trans      &trans      &trans      &trans      &sys_reset
+&trans        &trans     &trans      &trans     &trans      &trans                                                                                                                                             &trans      &trans      &trans      &trans      &trans      &trans
+&trans        &trans     &trans      &trans     &kp LG(LS(N4))  &trans                                                                                                                                        &kp LEFT    &kp DOWN    &kp UP      &kp RIGHT   &trans      &trans
+&trans        &kp LG(Z)  &kp LG(X)  &kp LG(C) &kp LG(V)   &trans       &trans  &trans  &to DEFAULT  &trans  &trans  &trans                                                                                   &kp HOME    &kp PG_DN   &kp PG_UP   &kp END     &trans      &trans
+&trans        &trans     &trans      &trans     &trans                    &trans  &trans  &trans       &trans  &trans  &trans                                                                                               &trans      &trans      &trans      &trans      &trans
+            >;
+        };
+
+        // =====================================================================
+        // Layer 3: Magic (Glove80 BT/RGB management)
+        // =====================================================================
         magic_layer {
             bindings = <
 &bt BT_CLR   &none            &none            &none            &none                                                                                     &none  &none  &none  &none  &bt BT_CLR_ALL
@@ -374,6 +419,9 @@
             >;
         };
 
+        // =====================================================================
+        // Layer 4: Factory Test
+        // =====================================================================
         factory_test_layer {
             bindings = <
 &kp N0  &kp N6  &kp N2  &kp N8  &kp N4                                                                  &kp N4  &kp N8  &kp N2  &kp N6  &kp N0
@@ -382,17 +430,6 @@
 &kp N3  &kp N9  &kp N5  &kp N1  &kp N7  &kp N2                                                  &kp N2  &kp N7  &kp N1  &kp N5  &kp N9  &kp N3
 &kp N4  &kp N0  &kp N6  &kp N2  &kp N8  &kp N3  &kp N4  &kp N5  &kp N6  &kp N6  &kp N5  &kp N4  &kp N3  &kp N8  &kp N2  &kp N6  &kp N0  &kp N4
 &kp N5  &kp N1  &kp N7  &kp N3  &kp N9          &kp N7  &kp N8  &kp N9  &kp N9  &kp N8  &kp N7          &kp N9  &kp N3  &kp N7  &kp N1  &kp N5
-            >;
-        };
-
-        numbers {
-            bindings = <
-&trans  &trans  &trans                     &trans  &trans                                                                                                                                                  &trans                        &trans  &trans                       &trans  &trans
-&trans  &trans  &trans                     &trans  &trans                      &trans                                                                               &trans                                 &trans                        &trans  &trans                       &trans  &trans
-&trans  &trans  &trans                     &trans  &trans                      &trans                                                                               &trans                                 &trans                        &trans  &trans                       &trans  &trans
-&trans  &kp N1  &hm_left_ring LEFT_ALT N2  &kp N3  &hm_left_index LEFT_GUI N4  &hyper_left LS(LC(LG(LEFT_ALT))) N5                                                  &hyper_right RS(RC(RG(RIGHT_ALT))) N6  &hm_right_index RIGHT_GUI N7  &kp N8  &hm_right_ring RIGHT_ALT N9  &kp N0  &trans
-&trans  &trans  &trans                     &trans  &trans                      &trans                               &trans  &trans  &trans  &trans  &trans  &trans  &trans                                 &trans                        &trans  &trans                       &trans  &trans
-&trans  &trans  &trans                     &trans  &trans                                                           &trans  &trans  &trans  &trans  &trans  &trans                                         &trans                        &trans  &trans                       &trans  &trans
             >;
         };
     };

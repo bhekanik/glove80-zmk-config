@@ -25,6 +25,10 @@ If you are looking to dig deeper into ZMK and develop new functionality, it is r
 3. Edit the keymap file(s) to suit your needs
 4. Commit and push your changes to your personal repo. Upon pushing it, GitHub Actions will start building a new version of your firmware with the updated keymap.
 
+## Custom keymap notes
+
+See [KEYMAP_DESIGN.md](KEYMAP_DESIGN.md) for the reasoning behind this portable Glove80/Moonlander/Corne-oriented layout.
+
 ## Firmware Files
 To locate your firmware files and reflash your Glove80...
 1. log into GitHub and navigate to your personal config repository you just uploaded your keymap changes to.

@@ -13,11 +13,11 @@ RUN <<EOF
     GIT_DIR=/zmk git worktree add --detach /src
 EOF
 
-# Prepopulate the container's nix store with the build dependencies for the main
-# branch and the most recent three tags
+# Prepopulate the container's nix store with the build dependencies for the
+# pinned release and the most recent three tags
 RUN <<EOF
     cd /src
-    for tag in main $(git tag -l --sort=committerdate | tail -n 3); do
+    for tag in v25.11 $(git tag -l --sort=committerdate | tail -n 3); do
       git checkout -q --detach $tag
       nix-shell --run true -A zmk ./default.nix
     done
@@ -26,7 +26,7 @@ EOF
 COPY --chmod=755 <<EOF /bin/entrypoint.sh
 #!/usr/bin/env bash
     set -euo pipefail
-    : "\${BRANCH:=main}"
+    : "\${BRANCH:=v25.11}"
 
     echo "Checking out \$BRANCH from moergo-sc/zmk" >&2
     cd /src
